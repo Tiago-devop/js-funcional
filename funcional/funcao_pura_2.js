@@ -5,9 +5,9 @@ function gerarNumeroAleatorio(min, max) {
     return parseInt(Math.random() * fator) + min
 }
 
-console.log(gerarNumeroAleatorio(1,10000))
-console.log(gerarNumeroAleatorio(1,10000))
-console.log(gerarNumeroAleatorio(1,10000))
-console.log(gerarNumeroAleatorio(1,10000))
-console.log(gerarNumeroAleatorio(1,10000))
-console.log(gerarNumeroAleatorio(1,10000))
+console.log(gerarNumeroAleatorio(1, 10000))
+console.log(gerarNumeroAleatorio(1, 10000))
+console.log(gerarNumeroAleatorio(1, 10000))
+console.log(gerarNumeroAleatorio(1, 10000))
+console.log(gerarNumeroAleatorio(1, 10000))
+console.log(gerarNumeroAleatorio(1, 10000))

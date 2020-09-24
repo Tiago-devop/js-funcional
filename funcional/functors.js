@@ -17,7 +17,7 @@ function TipoSeguro(valor) {
             return this.valor === null || this.valor === undefined
         },
         map(fn) {
-            if(this.invalido()) {
+            if (this.invalido()) {
                 return TipoSeguro(null)
             } else {
                 const novoValor = fn(this.valor)

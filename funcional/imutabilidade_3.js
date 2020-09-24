@@ -12,7 +12,7 @@ const outraPessoa = pessoa
 
 // Passagem por Referência
 function alteraPessoa(pessoa) {
-    const novaPessoa = { ... pessoa }
+    const novaPessoa = { ...pessoa }
     novaPessoa.nome = 'Tiago'
     novaPessoa.cidade = 'DF'
     novaPessoa.end.rua = 'ABC'

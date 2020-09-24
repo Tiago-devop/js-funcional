@@ -1,11 +1,11 @@
 function textoComTamanhoEntre(min) {
     return function (max) {
-        return function(erro) {
-            return function(texto) {
+        return function (erro) {
+            return function (texto) {
                 // Lazy Evaluation
                 const tamanho = (texto || '').trim().length
-            
-                if(tamanho < min || tamanho > max) {
+
+                if (tamanho < min || tamanho > max) {
                     throw erro
                 }
 

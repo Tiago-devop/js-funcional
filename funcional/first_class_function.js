@@ -3,7 +3,7 @@
 // linguagem são tratadas como qualquer outra variável.
 
 const x = 3
-const y = function(txt) {
+const y = function (txt) {
    return `esse é o texto: ${txt}`
 }
 

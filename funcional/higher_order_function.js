@@ -3,9 +3,9 @@
 // são chamadas de higher-order functions.
 
 function executar(fn, ...params) {
-   return function(textoInicial) {
-       return `${textoInicial} ${fn(...params)}!`
-   }
+    return function (textoInicial) {
+        return `${textoInicial} ${fn(...params)}!`
+    }
 }
 
 function somar(a, b, c) {

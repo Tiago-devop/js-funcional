@@ -1,7 +1,7 @@
 function textoComTamanhoEntre(min, max, erro, texto) {
     const tamanho = (texto || '').trim().length
 
-    if(tamanho < min || tamanho > max) {
+    if (tamanho < min || tamanho > max) {
         throw erro
     }
 }

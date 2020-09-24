@@ -2,7 +2,7 @@ function eager(a, b) {
 
     // processamento mais pesado
     const fim = Date.now() + 2500
-    while(Date.now() < fim) {}
+    while (Date.now() < fim) { }
 
     const valor = Math.pow(a, 3)
     return valor + b
@@ -12,12 +12,12 @@ function lazy(a) {
 
     // processamento mais pesado
     const fim = Date.now() + 2500
-    while(Date.now() < fim) {}
+    while (Date.now() < fim) { }
 
     const valor = Math.pow(a, 3)
-    return function(b) {
+    return function (b) {
         return valor + b
-    } 
+    }
 }
 
 console.time("#1")
