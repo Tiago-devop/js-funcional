@@ -33,9 +33,13 @@ function lerArquivos(caminhos) {
 }
 
 function elementosTerminadosCom(padraoTextual) {
-  return function (array) {
-    return array.filter(el => el.endsWith(padraoTextual))
-  }
+  return createPipeableOperator(subscriber => ({
+    next(texto) {
+      if(texto.endsWith(padraoTextual)) {
+        subscriber.next(texto)
+      }
+    }
+  }))
 }
 
 function removerElementosSeVazio(array) {
@@ -89,6 +93,19 @@ function ordernarPorAtributoNumerico(attr, ordem = 'ascendente') {
     const ascendente = (o1, o2) => o1[attr] - o2[attr]
     const decrescente = (o1, o2) => o2[attr] - o1[attr]
     return array.sort(ordem === 'ascendente' ? ascendente : decrescente)
+  }
+}
+
+function createPipeableOperator(operatorFn) {
+  return function (source) {
+    return new Observable(subscriber => {
+      const  sub = operatorFn(subscriber)
+      source.subscribe({
+        next: sub.next,
+        error: sub.error || (e => subscriber.error(e)),
+        complete: sub.complete || (e => subscriber.complete(e)),
+      })
+    })
   }
 }
 
