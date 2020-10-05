@@ -48,17 +48,21 @@ function removerElementosSeVazio() {
   }))
 }
 
+function removerElementosSeIniciarComNumero() {
+  return createPipeableOperator(subscriber => ({
+    next(texto) {
+      const num = parseInt(texto.trim())
+      if (num !== num) {
+        subscriber.next(texto)
+      }
+    }
+  }))
+}
+
 function removerElementosSeIncluir(padraoTextual) {
   return function (array) {
     return array.filter(el => !el.includes(padraoTextual))
   }
-}
-
-function removerElementosSeApenasNumero(array) {
-  return array.filter(el => {
-    const num = parseInt(el.trim())
-    return num !== num
-  })
 }
 
 function removerSimbolos(simbolos) {
@@ -121,7 +125,7 @@ module.exports = {
   elementosTerminadosCom,
   removerElementosSeVazio,
   removerElementosSeIncluir,
-  removerElementosSeApenasNumero,
+  removerElementosSeIniciarComNumero,
   removerSimbolos,
   mesclarElementos,
   separarTextoPor,

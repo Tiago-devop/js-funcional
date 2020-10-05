@@ -27,6 +27,7 @@ fn.lerDiretorio(caminho)
     fn.lerArquivo(),
     fn.separarTextoPor('\n'),
     fn.removerElementosSeVazio(),
+    fn.removerElementosSeIniciarComNumero(),
     // first(),
   )
   .subscribe(console.log)
