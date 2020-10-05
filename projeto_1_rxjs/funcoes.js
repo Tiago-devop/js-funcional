@@ -15,27 +15,23 @@ function lerDiretorio(caminho) {
   })
 }
 
-function lerArquivo(caminho) {
-  return new Promise((resolve, reject) => {
-    try {
-      const conteudo = fs.readFileSync(caminho, { encoding: 'utf-8' })
-      resolve(conteudo.toString())
-    } catch (e) {
-      reject(e)
+function lerArquivo() {
+  return createPipeableOperator(subscriber => ({
+    next(caminho) {
+      try {
+        const conteudo = fs.readFileSync(caminho, { encoding: 'utf-8' })
+        subscriber.next(conteudo.toString())
+      } catch (e) {
+        subscriber.error()
+      }
     }
-
-
-  })
-}
-
-function lerArquivos(caminhos) {
-  return Promise.all(caminhos.map(caminho => lerArquivo(caminho)))
+  }))
 }
 
 function elementosTerminadosCom(padraoTextual) {
   return createPipeableOperator(subscriber => ({
     next(texto) {
-      if(texto.endsWith(padraoTextual)) {
+      if (texto.endsWith(padraoTextual)) {
         subscriber.next(texto)
       }
     }
@@ -99,7 +95,7 @@ function ordernarPorAtributoNumerico(attr, ordem = 'ascendente') {
 function createPipeableOperator(operatorFn) {
   return function (source) {
     return new Observable(subscriber => {
-      const  sub = operatorFn(subscriber)
+      const sub = operatorFn(subscriber)
       source.subscribe({
         next: sub.next,
         error: sub.error || (e => subscriber.error(e)),
@@ -112,7 +108,6 @@ function createPipeableOperator(operatorFn) {
 module.exports = {
   lerDiretorio,
   lerArquivo,
-  lerArquivos,
   elementosTerminadosCom,
   removerElementosSeVazio,
   removerElementosSeIncluir,
