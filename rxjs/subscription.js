@@ -1,6 +1,4 @@
-const { VirtualTimeScheduler, Subscription } = require("rxjs");
-
-const { timer } = require('rxjs')
+const { timer, Subscription } = require('rxjs')
 
 const obs = timer(3000, 500)
 
