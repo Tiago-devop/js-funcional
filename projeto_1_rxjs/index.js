@@ -1,6 +1,7 @@
 const path = require('path')
 const fn = require('./funcoes')
-const { first, toArray } = require('rxjs/operators')
+const _ = require('lodash')
+const { toArray, map } = require('rxjs/operators')
 
 const caminho = path.join(__dirname, '..', 'legendas')
 
@@ -35,23 +36,7 @@ fn.lerDiretorio(caminho)
     fn.removerElementosSeVazio(),
     fn.removerElementosSeIniciarComNumero(),
     toArray(),
-    fn.agruparElementos()
+    fn.agruparElementos(),
+    map(array => _.sortBy(array, el => -el.qtde))
   )
   .subscribe(console.log)
-
-// fn.lerDiretorio(caminho)
-//   .then(fn.elementosTerminadosCom('.srt'))
-//   .then(fn.lerArquivos)
-//   .then(fn.mesclarElementos)
-//   .then(fn.separarTextoPor('\n'))
-//   .then(fn.removerElementosSeVazio)
-//   .then(fn.removerElementosSeIncluir('-->'))
-//   .then(fn.removerElementosSeApenasNumero)
-//   .then(fn.removerSimbolos(simbolos))
-//   .then(fn.mesclarElementos)
-//   .then(fn.separarTextoPor(' '))
-//   .then(fn.removerElementosSeVazio)
-//   .then(fn.removerElementosSeApenasNumero)
-//   .then(fn.agruparElementos)
-//   .then(fn.ordernarPorAtributoNumerico('qtde', 'decrescente'))
-//   .then(console.log)
