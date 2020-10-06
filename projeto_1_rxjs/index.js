@@ -18,7 +18,9 @@ const simbolos = [
   '[',
   ']',
   '(',
-  ')'
+  ')',
+  '!',
+  ':'
 ]
 
 fn.lerDiretorio(caminho)
@@ -28,6 +30,10 @@ fn.lerDiretorio(caminho)
     fn.separarTextoPor('\n'),
     fn.removerElementosSeVazio(),
     fn.removerElementosSeIniciarComNumero(),
+    fn.removerSimbolos(simbolos),
+    fn.separarTextoPor(' '),
+    fn.removerElementosSeVazio(),
+    fn.removerElementosSeIniciarComNumero()
     // first(),
   )
   .subscribe(console.log)

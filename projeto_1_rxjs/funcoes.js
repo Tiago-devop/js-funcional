@@ -59,20 +59,15 @@ function removerElementosSeIniciarComNumero() {
   }))
 }
 
-function removerElementosSeIncluir(padraoTextual) {
-  return function (array) {
-    return array.filter(el => !el.includes(padraoTextual))
-  }
-}
-
 function removerSimbolos(simbolos) {
-  return function (array) {
-    return array.map(el => {
-      return simbolos.reduce((acc, simbolo) => {
+  return createPipeableOperator(subscriber => ({
+    next(texto) {
+      const textoSemSimbolos = simbolos.reduce((acc, simbolo) => {
         return acc.split(simbolo).join('')
-      }, el)
-    })
-  }
+      }, texto)
+      subscriber.next(textoSemSimbolos)
+    }
+  }))
 }
 
 function mesclarElementos(array) {
@@ -124,7 +119,6 @@ module.exports = {
   lerArquivo,
   elementosTerminadosCom,
   removerElementosSeVazio,
-  removerElementosSeIncluir,
   removerElementosSeIniciarComNumero,
   removerSimbolos,
   mesclarElementos,
