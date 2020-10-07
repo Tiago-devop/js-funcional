@@ -1,40 +1,31 @@
-let r = 3
+Number.prototype.log = function() { console.log(+this) }
+Function.prototype.log = function() { console.log(this.toString()) }
 
 const I = a => a
 
-r = I(3)
-r
-
-r = I(I)
-r
+I(3).log()
+I(I).log()
 
 const SELF = f => f(f)
 
-r = SELF(I)
-r
+SELF(I).log()
 
 const PRI = a => _ => a
 
-r = PRI(7)(11)
-r
+PRI(7)(11).log()
 
 const ULT = _ => b => b
 
-r = ULT(7)(11)
-r
+ULT(7)(11).log()
 
 const TRO = f => a => b => f(b)(a)
 
-r = TRO(ULT)(7)(11)
-r
-
-r = TRO(PRI)(6)(12)
-r
+TRO(PRI)(6)(12).log()
+TRO(ULT)(7)(11).log()
 
 const ULT2 = a => b => TRO(PRI)(a)(b)
 
-r = ULT2(13)(20)
-r
+ULT2(13)(20).log()
 
 
 // boolean TRUE e FALSE
@@ -44,16 +35,42 @@ r
 const T = PRI
 const F = ULT
 
-T.inspect = () => 'Verdadeiro (PRI)'
-F.inspect = () => 'Falso (ULT)'
+T.toString = () => 'Verdadeiro (PRI)'
+F.toString = () => 'Falso (ULT)'
 
-T
-F
+T.log()
+F.log()
 
 // NOT
 const NOT = a => a(F)(T)
 
-r = NOT(T)
-r
-r = NOT(F)
-r
+NOT(T).log()
+NOT(F).log()
+
+// AND
+const AND = a => b => a(b)(F)
+
+AND(T)(T).log()
+
+// OR
+const OR = a => b => a(T)(b)
+
+OR(F)(F).toString()
+
+// EQ
+
+const EQ = a => b => a(b)(NOT(b))
+
+EQ(T)(T).log()
+EQ(T)(F).log()
+EQ(F)(T).log()
+EQ(F)(F).log()
+
+// XOR
+
+const XOR = a => b => NOT(EQ(a)(b))
+
+XOR(T)(T).log()
+XOR(F)(T).log()
+XOR(T)(F).log()
+XOR(F)(F).log()
